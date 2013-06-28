@@ -1,4 +1,6 @@
+require "bundler"
 require "thor"
+Bundler.require
 
 class Focus < Thor
 
