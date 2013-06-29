@@ -21,6 +21,19 @@ class Focus < Thor
 		puts "pwd gave back #{pwd}"
 
 	end
+
+
+  desc "clear", "clears all focuses from the focus group"
+  def clear
+
+  end
+
+  desc "limit", "sets the maximum amount of focuses you store before deletion begins"
+  def limit
+
+  end
+
+  default_task :set
 end
 
 Focus.start(ARGV)
