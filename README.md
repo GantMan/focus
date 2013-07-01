@@ -1,17 +1,28 @@
-focus
+focus (not yet functional)
 =====
 
-App to maintain recent project directory paths with minimal effort.  
-For those of us who work on a new project every week.
+####Quickly Remember and switch between recent projects.
+
+*focus* is an app to maintain recent project directory paths with minimal effort.  (WHAT!?)
+
+For those of us who work on a new project every week, you can keep your latest X projects in a focus group, 
+and switch among them with this single command.
 
 ## Example
-Go right back to your last `focus` project with a single command.
 
-*Original Method*
-  $~ : cd Projects/Client/resources/web/
-  $~/Projects/Client/resources/web/ : 
+*Go to your directory of your latest project*
+
+    $~: cd Projects/Client/resources/web/
+    
+*Use focus to set this directory*
+
+    $~/Projects/Client/resources/web/: focus set
   
-*focus Method*
-  $~ focus
-  $~/Projects/Client/resources/web/ : 
+*Next time you load up a terminal, return with ease*
+
+    $~: focus
+    $~/Projects/Client/resources/web/: 
+    
+    
+  
 
