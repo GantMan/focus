@@ -24,12 +24,20 @@ class Focus < Thor
 
 
   desc "clear", "clears all focuses from the focus group"
+  long_desc <<-LONGDESC
+  	`focus clear` will remove all directories stored. 
+  LONGDESC
   def clear
 
   end
 
   desc "limit", "sets the maximum amount of focuses you store before deletion begins"
-  def limit
+  long_desc <<-LONGDESC
+  	`focus limit` sets the maximum size of the focus list.  Whent he limit is reached the oldest entry will be deleted.
+
+  	Setting the limit to zero will allow the focus list to be unbounded.
+  LONGDESC
+  def limit(size)
 
   end
 
