@@ -1,24 +1,14 @@
+#!/usr/bin/env ruby
+$:.unshift File.dirname(__FILE__)
 require "bundler"
 require "thor"
-require "pathname"
-require "fileutils"
+require "lib/focus_filer"
+
 Bundler.require
-
+# Starting point for the Focus script.  Mostly includes the help/thor file documentation and uses
+# the FocusFiler object for nitty gritty details.
 class Focus < Thor
-  # Settings file per user
-  SETTINGS = "~/.focus.yml"
-
-  no_commands do
-    @settings = YAML::load_file SETTINGS if File.exists?(SETTINGS)
-
-
-    # Save the settings as they exist now
-    def save_settings
-      File.open(SETTINGS, "w") do |file|
-        file.write @settings.to_yaml
-      end
-    end
-  end
+  default_task :set
 
 	desc "set", "sets the current directory as the latest in directory in your focus group"
 	long_desc <<-LONGDESC
@@ -33,9 +23,7 @@ class Focus < Thor
 		# get the present working directory (requested)
 		pwd = options[:dir] || `pwd`
 		puts "pwd gave back #{pwd}"
-
 	end
-
 
   desc "clear", "clears all focuses from the focus group"
   long_desc <<-LONGDESC
@@ -48,8 +36,10 @@ class Focus < Thor
   desc "limit", "sets the maximum amount of focuses you store before deletion begins"
   long_desc <<-LONGDESC
   	`focus limit` sets the maximum size of the focus list.  Whent he limit is reached the oldest entry will be deleted.
+    \x5> $ focus limit 10
 
   	Setting the limit to zero will allow the focus list to be unbounded.
+    \x5> $ focus limit 0
   LONGDESC
   def limit(size)
 
@@ -57,13 +47,19 @@ class Focus < Thor
 
   desc "show", "shows the local yaml file storage of focus settings"
   long_desc <<-LONGDESC
-    `focus show` reads the settings and history file (#{SETTINGS}) and outputs the contents to stdout.
+    `focus show` reads the settings and history file (#{FocusFiler::SETTINGS_FILE}) and outputs the contents to stdout.
   LONGDESC
   def show
-    p @settings || "No settings have been stored on this system yet."
+    p focus_filer
   end
 
-  default_task :set
+
+  private 
+
+  def focus_filer
+    @focus_filer ||= FocusFiler.new
+  end
+
 end
 
 Focus.start(ARGV)
