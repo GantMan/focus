@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 $:.unshift File.dirname(__FILE__)
-require "bundler"
-require "thor"
-require "lib/focus_filer"
+require 'bundler'
+require 'thor'
+require 'lib/focus_filer'
 
 Bundler.require
 # Starting point for the Focus script.  Mostly includes the help/thor file documentation and uses
@@ -23,6 +23,8 @@ class Focus < Thor
 		# get the present working directory (requested)
 		pwd = options[:dir] || `pwd`
 		puts "pwd gave back #{pwd}"
+    focus_filer.write_focus pwd
+
 	end
 
   desc "clear", "clears all focuses from the focus group"
@@ -50,9 +52,8 @@ class Focus < Thor
     `focus show` reads the settings and history file (#{FocusFiler::SETTINGS_FILE}) and outputs the contents to stdout.
   LONGDESC
   def show
-    p focus_filer
+    p focus_filer.settings
   end
-
 
   private 
 
