@@ -22,17 +22,30 @@ class Focus < Thor
 	def set
 		# get the present working directory (requested)
 		pwd = options[:dir] || `pwd`
-		puts "pwd gave back #{pwd}"
     focus_filer.write_focus pwd
-
 	end
+
+  desc "rm", "removes the current directory from the focus group"
+  long_desc <<-LONGDESC
+    `focus rm` will remove the present working directory from focus' list.
+ 
+    You can optionally specify any directory other than the current working directy by using the `dir` option.
+    \x5> $ focus rm
+    \x5> $ focus rm --dir=~/Projects
+  LONGDESC
+  option :dir
+  def rm
+    # get the present working directory (requested)
+    pwd = options[:dir] || `pwd`
+    focus_filer.rm_focus pwd
+  end
 
   desc "clear", "clears all focuses from the focus group"
   long_desc <<-LONGDESC
   	`focus clear` will remove all directories stored. 
   LONGDESC
   def clear
-
+    focus_filer.clear_groups
   end
 
   desc "limit", "sets the maximum amount of focuses you store before deletion begins"
@@ -44,7 +57,7 @@ class Focus < Thor
     \x5> $ focus limit 0
   LONGDESC
   def limit(size)
-
+    focus_filer.write_limit size  
   end
 
   desc "show", "shows the local yaml file storage of focus settings"
@@ -52,7 +65,7 @@ class Focus < Thor
     `focus show` reads the settings and history file (#{FocusFiler::SETTINGS_FILE}) and outputs the contents to stdout.
   LONGDESC
   def show
-    p focus_filer.settings
+    ap focus_filer.settings
   end
 
   private 

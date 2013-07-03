@@ -22,10 +22,25 @@ class FocusFiler
   end
 
   def write_focus dir
-    @settings[:focus_group] ||= []
-    @settings[:focus_group].unshift(dir.chop)
-    @settings[:focus_group].uniq!
-    p @settings
+    @settings[:focus_group] ||= [] # make sure it's an array
+    @settings[:focus_group].unshift(dir.chop) #add with no newline
+    @settings[:focus_group].uniq! # once per dir
+    save_settings
+  end
+
+  def rm_focus dir
+    @settings[:focus_group] ||= [] # make sure it's an array
+    @settings[:focus_group].delete_if { |d| d == dir.chop } # remove dir
+    save_settings
+  end
+
+  def clear_groups
+    @settings[:focus_group] = [] # clear it out
+    save_settings
+  end
+
+  def write_limit size
+    @settings[:limit] = size.to_i
     save_settings
   end
 
