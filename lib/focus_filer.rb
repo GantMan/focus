@@ -23,7 +23,7 @@ class FocusFiler
 
   def write_focus dir
     @settings[:focus_group] ||= [] # make sure it's an array
-    @settings[:focus_group].unshift(dir.chop) #add to front with no newline
+    @settings[:focus_group].unshift(dir.strip) #add to front with no newline
     @settings[:focus_group].uniq! # once per dir
     @settings[:focus_group] = resize_focus(@settings[:limit]) # incase we have a limit
     save_settings
@@ -31,7 +31,7 @@ class FocusFiler
 
   def rm_focus dir
     @settings[:focus_group] ||= [] # make sure it's an array
-    @settings[:focus_group].delete_if { |d| d == dir.chop } # remove dir
+    @settings[:focus_group].delete_if { |d| d == dir.strip } # remove dir
     save_settings
   end
 
@@ -52,6 +52,8 @@ class FocusFiler
     if limit && limit > 0
       #using shift over slice here bc index may be out of range
       @settings[:focus_group].shift(limit)
+    else
+      @settings[:focus_group]
     end
   end
 
