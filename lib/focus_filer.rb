@@ -23,8 +23,9 @@ class FocusFiler
 
   def write_focus dir
     @settings[:focus_group] ||= [] # make sure it's an array
-    @settings[:focus_group].unshift(dir.chop) #add with no newline
+    @settings[:focus_group].unshift(dir.chop) #add to front with no newline
     @settings[:focus_group].uniq! # once per dir
+    @settings[:focus_group] = resize_focus(@settings[:limit]) # incase we have a limit
     save_settings
   end
 
@@ -35,7 +36,7 @@ class FocusFiler
   end
 
   def clear_groups
-    @settings[:focus_group] = [] # clear it out
+    @settings[:focus_group].clear
     save_settings
   end
 
@@ -45,6 +46,14 @@ class FocusFiler
   end
 
   private
+
+  # if the limit is being used (i.e. >0), we need to cut trailing off 
+  def resize_focus(limit)
+    if limit && limit > 0
+      #using shift over slice here bc index may be out of range
+      @settings[:focus_group].shift(limit)
+    end
+  end
 
   # Save the settings as they exist now
   def save_settings
