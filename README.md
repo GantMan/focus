@@ -1,6 +1,8 @@
 focus (not yet functional)
 =====
 
+### The answer to "What and where was I" for terminal users.  Just type _focus_
+
 ####Quickly Remember and switch between recent projects.
 
 *focus* is an app to maintain recent project directory paths with minimal effort.  (WHAT!?)

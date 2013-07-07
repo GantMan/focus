@@ -6,21 +6,18 @@ class FocusFiler
   attr_accessor :settings
 
   # Settings file per user
-  SETTINGS_FILE = "focus.yml"
+  SETTINGS_FILE = ENV['HOME'] + "/.focus.yml"
 
   def initialize
-    if File.exists?(SETTINGS_FILE)
-      @settings = YAML::load_file SETTINGS_FILE
-    else
-      @settings = {}
-    end
-
-    @settings[:focus_group] ||= [] # make sure it's an array type
-    
+    # initialize from file and defaults
+    @settings = YAML::load_file SETTINGS_FILE if File.exists?(SETTINGS_FILE)
+    @settings ||= {} # default to hash
+    @settings[:focus_group] ||= [] # default to array
+    @settings[:limit] ||= 0 # default to infite size 
   end
 
   def settings
-    @settings || "No settings have been stored on this system yet."
+    @settings
   end
 
   def write_focus dir

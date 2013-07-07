@@ -65,6 +65,7 @@ class Focus < Thor
     `focus show` reads the settings and history file (#{FocusFiler::SETTINGS_FILE}) and outputs the contents to stdout.
   LONGDESC
   def show
+    puts "Settings Contents of #{FocusFiler::SETTINGS_FILE}"
     ap focus_filer.settings
   end
 
