@@ -80,9 +80,7 @@ class Focus < Thor
       puts "It appears your focus group is empty!  Try setting a path with `focus set` to get started.".red
     end
 
-    p Dir.getwd
-    Dir.chdir "/"
-    p Dir.getwd
+    #exec "cd ~/"
   end
 
   private 
