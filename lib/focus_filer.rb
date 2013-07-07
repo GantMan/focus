@@ -6,7 +6,7 @@ class FocusFiler
   attr_accessor :settings
 
   # Settings file per user
-  SETTINGS_FILE = ENV['HOME'] + "/.focus.yml"
+  SETTINGS_FILE = Dir.home + "/.focus.yml"
 
   def initialize
     # initialize from file and defaults
