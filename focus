@@ -8,7 +8,7 @@ Bundler.require
 # Starting point for the Focus script.  Mostly includes the help/thor file documentation and uses
 # the FocusFiler object for nitty gritty details.
 class Focus < Thor
-  default_task :set
+  default_task :go
 
 	desc "set", "sets the current directory as the latest in directory in your focus group"
 	long_desc <<-LONGDESC
@@ -65,8 +65,21 @@ class Focus < Thor
     `focus show` reads the settings and history file (#{FocusFiler::SETTINGS_FILE}) and outputs the contents to stdout.
   LONGDESC
   def show
-    puts "Settings Contents of #{FocusFiler::SETTINGS_FILE}"
+    puts "Settings Contents of #{FocusFiler::SETTINGS_FILE}".yellow
     ap focus_filer.settings
+  end
+
+  desc "go", "[DEFAULT]".green + " sets your present working directory (or option --dir) to the next focus directory in your group"
+  long_desc <<-LONGDESC
+    `focus go` ALSO default `focus` will change your present working directory to the next (or first) path in your focus_group
+  LONGDESC
+  def go
+    pwd = `pwd`
+    if new_path = focus_filer.next(pwd)
+
+    else
+      puts "It appears your focus group is empty!  Try setting a path with `focus set` to get started.".red
+    end
   end
 
   private 

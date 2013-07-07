@@ -44,6 +44,10 @@ class FocusFiler
     save_settings
   end
 
+  def next dir
+    false
+  end
+
   private
 
   # if the limit is being used (i.e. >0), we need to cut trailing off 

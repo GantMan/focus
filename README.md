@@ -1,7 +1,7 @@
 focus (not yet functional)
 =====
 
-### The answer to "What and where was I" for terminal users.  Just type _focus_
+### The answer to "What and where was I?" for terminal users.  Just type _focus_
 
 ####Quickly Remember and switch between recent projects.
 
@@ -24,7 +24,12 @@ and switch among them with this single command.
 
     $~: focus
     $~/Projects/Client/resources/web/: 
-    
-    
+
+*Also, cycle backward through previous focus paths with the same exact command
+
+     $~/Projects/Client/resources/web/: focus   
+     $~/Projects/PreviousProject/ios/ipad/app:      
+
+No more need to remember each project's structure and location.  Simply return!
   
 
