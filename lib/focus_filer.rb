@@ -14,6 +14,8 @@ class FocusFiler
     else
       @settings = {}
     end
+
+    @settings[:focus_group] ||= [] # make sure it's an array type
     
   end
 
@@ -22,7 +24,6 @@ class FocusFiler
   end
 
   def write_focus dir
-    @settings[:focus_group] ||= [] # make sure it's an array
     @settings[:focus_group].unshift(dir.strip) #add to front with no newline
     @settings[:focus_group].uniq! # once per dir
     @settings[:focus_group] = resize_focus(@settings[:limit]) # incase we have a limit
@@ -41,7 +42,8 @@ class FocusFiler
   end
 
   def write_limit size
-    @settings[:limit] = size.to_i
+    @settings[:limit] = size.strip.to_i
+    @settings[:focus_group] = resize_focus(@settings[:limit])
     save_settings
   end
 
@@ -59,7 +61,7 @@ class FocusFiler
 
   # Save the settings as they exist now
   def save_settings
-    File.open(SETTINGS_FILE, File::WRONLY|File::CREAT) do |file|
+    File.open(SETTINGS_FILE, File::TRUNC|File::WRONLY|File::CREAT) do |file|
       file.write @settings.to_yaml
     end
   end

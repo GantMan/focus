@@ -57,7 +57,7 @@ class Focus < Thor
     \x5> $ focus limit 0
   LONGDESC
   def limit(size)
-    focus_filer.write_limit size  
+    focus_filer.write_limit size
   end
 
   desc "show", "shows the local yaml file storage of focus settings"
