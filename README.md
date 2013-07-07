@@ -32,4 +32,7 @@ and switch among them with this single command.
 
 No more need to remember each project's structure and location.  Simply return!
   
+####
+*DISCLAIMER* Yes, you can do this with system's `pushd` and `popd`, but I've honestly found their workflow annoying (changing dir on pushd, removing on use of popd).  
+Additionally, a stack is generally annoying to clean/order/adjust.  Focus is meant to keep things clear.
 
