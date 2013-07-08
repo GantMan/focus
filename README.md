@@ -1,4 +1,4 @@
-focus (not yet functional)
+focus - CAN'T WORK DUE TO CHILD-PROCESS
 =====
 
 ### The answer to "What and where was I?" for terminal users.  Just type _focus_
@@ -32,7 +32,12 @@ and switch among them with this single command.
 
 No more need to remember each project's structure and location.  Simply return!
   
-####
-*DISCLAIMER* Yes, you can do this with system's `pushd` and `popd`, but I've honestly found their workflow annoying (changing dir on pushd, removing on use of popd).  
+#### *DISCLAIMER* 
+Yes, you can do this with system's `pushd` and `popd`, but I've honestly found their workflow annoying (changing dir on pushd, removing on use of popd).  
 Additionally, a stack is generally annoying to clean/order/adjust.  Focus is meant to keep things clear.
 
+# DEATH NOTICE
+This project can't come to be, since all ruby scripts are a child process, and I can't seem to figure out how to change the directory for the user (the parent process)
+All blogs/docs/help forums say it's not possible.
+
+Code will remain here, because it's a nearly complete Thor application (minus usefulness).
