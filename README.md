@@ -1,4 +1,4 @@
-focus - CAN'T WORK DUE TO CHILD-PROCESS
+focus - Status DEAD ([Death Notice](#death-notice))
 =====
 
 ### The answer to "What and where was I?" for terminal users.  Just type _focus_
